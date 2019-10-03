@@ -4,10 +4,10 @@
 - Supports sorting of using directives: By Length or By Alphabetical Order
 - Supports sorting chaining
 - Supports user-defined grouping on using directives; sort happens within each group in this case
-
+- Supports Visual Studio 2019
 # Download
 
-Published and available for download at https://marketplace.visualstudio.com/vsgallery/11b3b4b4-77fc-46b5-8c68-7bda38c393a2
+Published and available for download at https://marketplace.visualstudio.com/items?itemName=UsingDirectiveFormatter.UsingDirectiveFormatter
 
 # Demo
 The demo below shows both a working demo, and a screenshot of options available for the extension
