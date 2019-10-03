@@ -7,7 +7,7 @@
 - Supports Visual Studio 2019
 # Download
 
-Published and available for download at https://marketplace.visualstudio.com/items?itemName=UsingDirectiveFormatter.UsingDirectiveFormatter
+Published and available for download at https://marketplace.visualstudio.com/items?itemName=KarthikDV.UsingDirectiveFormatter
 
 # Demo
 The demo below shows both a working demo, and a screenshot of options available for the extension
