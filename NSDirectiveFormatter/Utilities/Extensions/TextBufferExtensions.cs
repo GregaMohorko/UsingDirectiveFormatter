@@ -1,11 +1,11 @@
 ﻿namespace Microsoft.VisualStudio.Text
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using UsingDirectiveFormatter.Commands;
-    using UsingDirectiveFormatter.Utilities;
     using UsingDirectiveFormatter.Contracts;
+    using UsingDirectiveFormatter.Utilities;
 
     /// <summary>
     /// TextBufferExtensions
@@ -76,7 +76,7 @@
                 tail += line.LengthIncludingLineBreak;
 
                 if (nsReached && insideNamespace &&
-                    !string.IsNullOrWhiteSpace(lineTextTrimmed) && 
+                    !string.IsNullOrWhiteSpace(lineTextTrimmed) &&
                     string.IsNullOrEmpty(indent))
                 {
                     indent = lineText.Substring(0, lineText.IndexOf(lineTextTrimmed));

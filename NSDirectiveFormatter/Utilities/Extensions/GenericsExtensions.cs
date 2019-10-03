@@ -31,15 +31,15 @@
 
             if (standards.Count > 0)
             {
-                return standards.Aggregate((IOrderedEnumerable<string>) null, (orderedCollection, standard) => 
-                {
-                    if (orderedCollection == null)
-                    {
-                        return collection.OrderBySortStandard(standard);
-                    }
+                return standards.Aggregate((IOrderedEnumerable<string>)null, (orderedCollection, standard) =>
+               {
+                   if (orderedCollection == null)
+                   {
+                       return collection.OrderBySortStandard(standard);
+                   }
 
-                    return orderedCollection.OrderBySortStandard(standard, true);
-                });
+                   return orderedCollection.OrderBySortStandard(standard, true);
+               });
             }
 
             return collection;
@@ -63,10 +63,12 @@
                     return chained ?
                         ((IOrderedEnumerable<string>)collection).ThenBy(s => s.Length) :
                         collection.OrderBy(s => s.Length);
+
                 case SortStandard.LengthDescending:
                     return chained ?
                         ((IOrderedEnumerable<string>)collection).ThenByDescending(s => s.Length) :
                         collection.OrderByDescending(s => s.Length);
+
                 case SortStandard.Alphabetical:
                     // Replace the ending ; since it can mess up the string comparison
                     return chained ?
@@ -100,7 +102,7 @@
             {
                 return collection;
             }
-            
+
             var dict = new Dictionary<SortGroup, IList<string>>();
             foreach (var group in groups)
             {

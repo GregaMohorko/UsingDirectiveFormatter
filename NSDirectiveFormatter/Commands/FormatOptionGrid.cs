@@ -1,12 +1,12 @@
 ﻿namespace UsingDirectiveFormatter.Commands
 {
-    using System.ComponentModel;
-    using Microsoft.VisualStudio.Shell;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using Microsoft.VisualStudio.Settings;
+    using Microsoft.VisualStudio.Shell;
+    using Microsoft.VisualStudio.Shell.Settings;
     using UsingDirectiveFormatter.Contracts;
     using UsingDirectiveFormatter.Utilities;
-    using Microsoft.VisualStudio.Shell.Settings;
 
     /// <summary>
     /// FormatOptionGrid
@@ -187,7 +187,7 @@
             {
                 return;
             }
-            
+
             this.sortGroups = LoadFromStore(userSettingStore, nameof(sortGroups), new SortGroupCollectionConverter())
                 as Collection<SortGroup> ?? this.SortGroups;
         }

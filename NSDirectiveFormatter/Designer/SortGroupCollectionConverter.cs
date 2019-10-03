@@ -1,10 +1,10 @@
 ﻿namespace UsingDirectiveFormatter.Commands
 {
     using System;
-    using System.Linq;
-    using System.Globalization;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Linq;
     using UsingDirectiveFormatter.Contracts;
 
     /// <summary>
@@ -109,7 +109,7 @@
                     return result;
                 }
 
-                var groups = stringValue.Split(new [] { Delimiter }, StringSplitOptions.RemoveEmptyEntries);
+                var groups = stringValue.Split(new[] { Delimiter }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (var group in groups)
                 {
                     if (string.Equals(group, EverythingElse, StringComparison.Ordinal))

@@ -68,6 +68,6 @@
             return $"{this.Standard.ToString()}({this.Filter})";
         }
 
-        #endregion
+        #endregion Fields
     }
 }

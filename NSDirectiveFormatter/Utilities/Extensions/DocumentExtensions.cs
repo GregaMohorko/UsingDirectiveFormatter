@@ -3,10 +3,10 @@
     using System;
     using EnvDTE80;
     using Microsoft.VisualStudio.Shell;
-    using UsingDirectiveFormatter.Utilities;
-    using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.Shell.Interop;
+    using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.TextManager.Interop;
+    using UsingDirectiveFormatter.Utilities;
     using VSIServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
     /// <summary>
@@ -29,7 +29,7 @@
             uint itemId;
             IVsWindowFrame windowFrame;
 
-            if (VsShellUtilities.IsDocumentOpen(new ServiceProvider(dte2 as VSIServiceProvider), 
+            if (VsShellUtilities.IsDocumentOpen(new ServiceProvider(dte2 as VSIServiceProvider),
                 document.FullName, Guid.Empty, out uiHierarchy, out itemId, out windowFrame))
             {
                 return VsShellUtilities.GetTextView(windowFrame);

@@ -1,6 +1,5 @@
 ﻿namespace UsingDirectiveFormatter.Contracts
 {
-
     /// <summary>
     /// SortGroupStandard
     /// </summary>

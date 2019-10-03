@@ -1,10 +1,10 @@
 ﻿namespace Microsoft.VisualStudio.TextManager.Interop
 {
     using ComponentModelHost;
-    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Editor;
-    using UsingDirectiveFormatter.Utilities;
+    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text.Editor;
+    using UsingDirectiveFormatter.Utilities;
 
     /// <summary>
     /// VSTetxViewExtensions

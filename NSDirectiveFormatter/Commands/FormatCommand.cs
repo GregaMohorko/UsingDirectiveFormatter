@@ -5,13 +5,13 @@
 //------------------------------------------------------------------------------
 namespace UsingDirectiveFormatter.Commands
 {
-    using EnvDTE;
     using System;
-    using EnvDTE80;
-    using Microsoft.VisualStudio.Text;
-    using Microsoft.VisualStudio.Shell;
     using System.ComponentModel.Design;
+    using EnvDTE;
+    using EnvDTE80;
+    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
+    using Microsoft.VisualStudio.Text;
 
     /// <summary>
     /// Command handler
@@ -115,7 +115,7 @@ namespace UsingDirectiveFormatter.Commands
 
             this.document = this.Dte.ActiveDocument;
 
-            if (this.document == null || 
+            if (this.document == null ||
                 !this.document.IsCSharpCode())
             {
                 return;
