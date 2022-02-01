@@ -7,9 +7,10 @@ namespace UsingDirectiveFormatter.Commands
 {
     using System;
     using System.ComponentModel.Design;
-    using EnvDTE;
-    using EnvDTE80;
-    using Microsoft.VisualStudio.Shell;
+	using EnvDTE;
+	using EnvDTE80;
+	using Microsoft;
+	using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Shell.Interop;
     using Microsoft.VisualStudio.Text;
 
@@ -70,7 +71,9 @@ namespace UsingDirectiveFormatter.Commands
             }
 
             this.Dte = this.ServiceProvider.GetService(typeof(SDTE)) as DTE2;
-        }
+			Assumes.Present(
+			this.Dte);
+		}
 
         /// <summary>
         /// Gets the instance of the command.
@@ -108,7 +111,9 @@ namespace UsingDirectiveFormatter.Commands
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void MenuItem_BeforeQueryStatus(object sender, EventArgs e)
         {
-            var command = (OleMenuCommand)sender;
+			ThreadHelper.ThrowIfNotOnUIThread();
+
+			var command = (OleMenuCommand)sender;
 
             command.Visible = false;
             command.Enabled = false;
@@ -134,7 +139,9 @@ namespace UsingDirectiveFormatter.Commands
         /// <param name="e">Event args.</param>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            var options = ((FormatCommandPackage)this.package).GetOptions();
+			ThreadHelper.ThrowIfNotOnUIThread();
+
+			var options = ((FormatCommandPackage)this.package).GetOptions();
             this.document
                 .ToIWpfTextView(this.Dte)
                 .TextBuffer
