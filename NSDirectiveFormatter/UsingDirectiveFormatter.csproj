@@ -61,6 +61,7 @@
     <Compile Include="Options\FormatOptionGrid.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SaveHandler.cs" />
     <Compile Include="Contracts\SortGroup.cs" />
     <Compile Include="Contracts\SortGroupStandard.cs" />
     <Compile Include="Contracts\SortStandard.cs" />
@@ -105,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Design" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
