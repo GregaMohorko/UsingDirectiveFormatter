@@ -1,144 +1,86 @@
-﻿//------------------------------------------------------------------------------
-// <copyright file="FormatCommand.cs" company="Company">
-//     Copyright (c) Company.  All rights reserved.
-// </copyright>
-//------------------------------------------------------------------------------
+﻿using System;
+using System.ComponentModel.Design;
+using EnvDTE;
+using EnvDTE80;
+using Microsoft;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Text;
+
 namespace UsingDirectiveFormatter.Commands
 {
-    using System;
-    using System.ComponentModel.Design;
-    using EnvDTE;
-    using EnvDTE80;
-    using Microsoft.VisualStudio.Shell;
-    using Microsoft.VisualStudio.Shell.Interop;
-    using Microsoft.VisualStudio.Text;
+	internal sealed class FormatCommand
+	{
+		public static FormatCommand Instance { get; private set; }
+		public static void Initialize(FormatCommandPackage package)
+		{
+			Instance = new FormatCommand(package);
+		}
 
-    /// <summary>
-    /// Command handler
-    /// </summary>
-    internal sealed class FormatCommand
-    {
-        /// <summary>
-        /// Command ID.
-        /// </summary>
-        public const int CommandId = 0x0100;
+		private DTE2 Dte { get; set; }
+		private Document Document { get; set; }
 
-        /// <summary>
-        /// Command menu group (command set GUID).
-        /// </summary>
-        public static readonly Guid CommandSet = new Guid("2bb0aad7-e323-43dc-883c-cab65d5684c7");
+		private readonly FormatCommandPackage package;
 
-        /// <summary>
-        /// VS Package that provides this command, not null.
-        /// </summary>
-        private readonly Package package;
+		/// <summary>
+		/// Adds our command handlers for menu (commands must exist in the command table file)
+		/// </summary>
+		private FormatCommand(FormatCommandPackage package)
+		{
+			this.package = package;
 
-        /// <summary>
-        /// The DTE
-        /// </summary>
-        private DTE2 Dte
-        {
-            get;
-            set;
-        }
+			var serviceProvider = this.package as IServiceProvider;
+			Assumes.Present(serviceProvider);
 
-        /// <summary>
-        /// The document
-        /// </summary>
-        private Document document
-        {
-            get;
-            set;
-        }
+			if(serviceProvider.GetService(typeof(IMenuCommandService)) is OleMenuCommandService commandService) {
+				var menuCommandID = new CommandID(PackageGuids.guidFormatCommandPackageCmdSet, PackageIds.FormatCommandId);
+				var menuItem = new OleMenuCommand(MenuItemCallback, menuCommandID);
+				menuItem.BeforeQueryStatus += MenuItem_BeforeQueryStatus;
+				commandService.AddCommand(menuItem);
+			}
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormatCommand"/> class.
-        /// Adds our command handlers for menu (commands must exist in the command table file)
-        /// </summary>
-        /// <param name="package">Owner package, not null.</param>
-        private FormatCommand(Package package)
-        {
-            this.package = package ?? throw new ArgumentNullException("package");
+			Dte = serviceProvider.GetService(typeof(SDTE)) as DTE2;
+			Assumes.Present(Dte);
+		}
 
-            OleMenuCommandService commandService = this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
-            if (commandService != null)
-            {
-                var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new OleMenuCommand(this.MenuItemCallback, menuCommandID);
-                menuItem.BeforeQueryStatus += MenuItem_BeforeQueryStatus;
-                commandService.AddCommand(menuItem);
-            }
+		/// <summary>
+		/// Handles the BeforeQueryStatus event of the MenuItem control.
+		/// </summary>
+		private void MenuItem_BeforeQueryStatus(object sender, EventArgs e)
+		{
+			ThreadHelper.ThrowIfNotOnUIThread();
 
-            this.Dte = this.ServiceProvider.GetService(typeof(SDTE)) as DTE2;
-        }
+			var command = (OleMenuCommand)sender;
 
-        /// <summary>
-        /// Gets the instance of the command.
-        /// </summary>
-        public static FormatCommand Instance
-        {
-            get;
-            private set;
-        }
+			Document = Dte.ActiveDocument;
 
-        /// <summary>
-        /// Gets the service provider from the owner package.
-        /// </summary>
-        private IServiceProvider ServiceProvider
-        {
-            get
-            {
-                return this.package;
-            }
-        }
+			if(Document == null
+				|| !Document.IsCSharpCode()
+				) {
+				command.Visible = false;
+				command.Enabled = false;
+				return;
+			}
 
-        /// <summary>
-        /// Initializes the singleton instance of the command.
-        /// </summary>
-        /// <param name="package">Owner package, not null.</param>
-        public static void Initialize(Package package)
-        {
-            Instance = new FormatCommand(package);
-        }
+			command.Visible = true;
+			command.Enabled = true;
+		}
 
-        /// <summary>
-        /// Handles the BeforeQueryStatus event of the MenuItem control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void MenuItem_BeforeQueryStatus(object sender, EventArgs e)
-        {
-            var command = (OleMenuCommand)sender;
+		/// <summary>
+		/// This function is the callback used to execute the command when the menu item is clicked.
+		/// See the constructor to see how the menu item is associated with this function using
+		/// OleMenuCommandService service and MenuCommand class.
+		/// </summary>
+		private void MenuItemCallback(object sender, EventArgs e)
+		{
+			ThreadHelper.ThrowIfNotOnUIThread();
 
-            command.Visible = false;
-            command.Enabled = false;
+			var options = package.GetOptions();
 
-            this.document = this.Dte.ActiveDocument;
-
-            if (this.document == null ||
-                !this.document.IsCSharpCode())
-            {
-                return;
-            }
-
-            command.Visible = true;
-            command.Enabled = true;
-        }
-
-        /// <summary>
-        /// This function is the callback used to execute the command when the menu item is clicked.
-        /// See the constructor to see how the menu item is associated with this function using
-        /// OleMenuCommandService service and MenuCommand class.
-        /// </summary>
-        /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
-        private void MenuItemCallback(object sender, EventArgs e)
-        {
-            var options = ((FormatCommandPackage)this.package).GetOptions();
-            this.document
-                .ToIWpfTextView(this.Dte)
-                .TextBuffer
-                .Format(options);
-        }
-    }
+			Document
+				.ToIWpfTextView(Dte)
+				.TextBuffer
+				.Format(options);
+		}
+	}
 }

@@ -4,11 +4,12 @@
     using System.Linq;
     using UsingDirectiveFormatter.Contracts;
     using UsingDirectiveFormatter.Utilities;
+	using UsingDirectiveFormatter.Utilities.Extensions;
 
-    /// <summary>
-    /// GenericsExtensions
-    /// </summary>
-    public static class GenericsExtensions
+	/// <summary>
+	/// GenericsExtensions
+	/// </summary>
+	public static class GenericsExtensions
     {
         /// <summary>
         /// The using namespace directive prefix
