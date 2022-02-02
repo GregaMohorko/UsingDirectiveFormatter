@@ -171,6 +171,9 @@
 
                 var insertPos = nsReached && insideNamespace ? nsInnerStartPos : nsOuterStartPos;
                 var insertString = string.Join(Environment.NewLine, usingDirectives) + Environment.NewLine;
+				if(options.AddEmptyLineAfter) {
+					insertString += Environment.NewLine;
+				}
 
                 // Testing
                 var edit = buffer.CreateEdit();

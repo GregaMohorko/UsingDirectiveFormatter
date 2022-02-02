@@ -70,6 +70,10 @@
 		[Description("Separate sort groups with blank lines")]
 		public bool NewLineBetweenSortGroups { get; set; } = false;
 
+		[Category("Options")]
+		[DisplayName("6. Add empty line")]
+		[Description("Add an empty line after using's")]
+		public bool AddEmptyLineAfter { get; set; } = true;
 
 		/// <summary>
 		/// Called by Visual Studio to store the settings of a dialog page in local storage, typically the registry.
