@@ -28,7 +28,7 @@ namespace UsingDirectiveFormatter.Commands
 	[ProvideMenuResource("Menus.ctmenu", 1)]
 	[Guid(PackageGuidString)]
 	[ProvideAutoLoad(VSConstants.UICONTEXT.NoSolution_string, PackageAutoLoadFlags.BackgroundLoad)]
-    [ProvideOptionPage(typeof(FormatOptionGrid), "Using Directive Formatter 2", "Options", 0, 0, true)]
+	[ProvideOptionPage(typeof(FormatOptionGrid), "Using Directive Formatter 3", "Options", 0, 0, true)]
 	public sealed class FormatCommandPackage : AsyncPackage
 	{
 		/// <summary>
