@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="UsingDirectiveFormatter2022.Mohorko G.2c532cfa-59ef-4e4e-8b4c-11a39ffd91cf" Version="1.6" Language="en-US" Publisher="Using Directive Formatter" />
+        <Identity Id="UsingDirectiveFormatterVS2022.Mohorko G.2c532cfa-59ef-4e4e-8b4c-11a39ffd91cf" Version="2.0" Language="en-US" Publisher="Gregor Mohorko" />
         <DisplayName>Using Directive Formatter VS2022</DisplayName>
         <Description xml:space="preserve">Formats using namespace directives in C# code. Allows you to specify (with regex) which namespaces to put where. This is super helpful when you want to order usings from the system to domain. It also supports automatic sorting on Save.</Description>
         <MoreInfo>https://github.com/GregaMohorko/UsingDirectiveFormatter</MoreInfo>

@@ -1,15 +1,16 @@
 # Using Directive Formatter
-- Small Visual Studio extension for productivity in C# developments
-- Can be configured to place all using directives inside or outside the namespace declaration
-- Supports sorting of using directives: By Length or By Alphabetical Order
-- Supports sorting chaining
-- Supports user-defined grouping on using directives; sort happens within each group in this case
-- Supports Visual Studio 2019
+- Formats using namespace directives for C# codes
+	- Can be configured to automatically format on Save
+- The using directives will be placed inside or outside the namespace declaration, depending on user configuration
+- Order using directives by length or alphabetically, so that they appear in order
+- Supports order chaining
+- Supports grouping of using directives. Sorting happens within groups in this case.
+- Currently supported versions: Visual Studio 2022
 # Download
 
-Published and available for download at https://marketplace.visualstudio.com/items?itemName=KarthikDV.UsingDirectiveFormatter
+Published and available for download at https://marketplace.visualstudio.com/items?itemName=GregaMohorko.MohorkoGUsingDirectiveFormatter
 
 # Demo
 The demo below shows both a working demo, and a screenshot of options available for the extension
-![Demo gif](https://github.com/everfor/NSDirectiveFormatter/blob/master/demo.gif "Demo")
-![Option gif](https://github.com/everfor/UsingDirectiveFormatter/blob/master/option.gif "Option")
+![Demo gif](demo.gif "Demo")
+![Option gif](option.gif "Option")
