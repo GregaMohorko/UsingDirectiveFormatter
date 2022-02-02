@@ -22,7 +22,9 @@
         /// <returns></returns>
         public static IVsTextView ToIVsTextView(this Document document, DTE2 dte2)
         {
-            ArgumentGuard.ArgumentNotNull(document, "document");
+			ThreadHelper.ThrowIfNotOnUIThread();
+
+			ArgumentGuard.ArgumentNotNull(document, "document");
             ArgumentGuard.ArgumentNotNull(dte2, "dte2");
 
             IVsUIHierarchy uiHierarchy;
@@ -46,7 +48,9 @@
         /// <returns></returns>
         public static IWpfTextView ToIWpfTextView(this Document document, DTE2 dte2)
         {
-            ArgumentGuard.ArgumentNotNull(document, "document");
+			ThreadHelper.ThrowIfNotOnUIThread();
+
+			ArgumentGuard.ArgumentNotNull(document, "document");
             ArgumentGuard.ArgumentNotNull(dte2, "dte2");
 
             return document.ToIVsTextView(dte2).ToWpfTextView();
@@ -61,7 +65,9 @@
         /// </returns>
         public static bool IsCSharpCode(this Document document)
         {
-            ArgumentGuard.ArgumentNotNull(document, "document");
+			ThreadHelper.ThrowIfNotOnUIThread();
+
+			ArgumentGuard.ArgumentNotNull(document, "document");
 
             return document.Language.Equals("CSharp", StringComparison.OrdinalIgnoreCase);
         }

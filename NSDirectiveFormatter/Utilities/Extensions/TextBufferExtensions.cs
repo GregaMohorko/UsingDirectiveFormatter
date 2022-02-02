@@ -61,7 +61,7 @@
 
             // Using directives before namespace (if any)
             Span? prensSpan = null;
-            // Using directives inside namespace, or all usings is there's no namespace
+            // Using directives inside namespace, or all usings if there's no namespace
             Span? nsSpan = null;
 
             bool lastSpanContainsComment = false;
