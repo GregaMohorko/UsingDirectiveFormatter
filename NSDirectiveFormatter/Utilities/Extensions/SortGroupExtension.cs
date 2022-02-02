@@ -1,8 +1,9 @@
-﻿namespace UsingDirectiveFormatter.Contracts
+﻿namespace UsingDirectiveFormatter.Utilities.Extensions
 {
     using System;
     using System.Text.RegularExpressions;
-    using UsingDirectiveFormatter.Utilities;
+	using UsingDirectiveFormatter.Contracts;
+	using UsingDirectiveFormatter.Utilities;
 
     /// <summary>
     /// SortGroupExtension
